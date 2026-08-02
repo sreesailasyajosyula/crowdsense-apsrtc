@@ -14,7 +14,7 @@ interface RouteInsight {
   crowdLevel: CrowdLevel;
   avgWaitingMins: number;
   peakTime: string| null;
-  bestTime: string| null;
+  
 }
 
 export function RouteInsights() {
@@ -197,15 +197,6 @@ export function RouteInsights() {
                   <div>
                     <p className="text-xs text-slate-400">{t.routeInsights.peakTime}</p>
                     <p className="text-sm font-bold text-ink">{formatTime(route.peakTime)}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-card text-primary">
-                    <Sunrise className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <p className="text-xs text-slate-400">{t.routeInsights.bestTime}</p>
-                    <p className="text-sm font-bold text-ink">{formatTime(route.bestTime)}</p>
                   </div>
                 </div>
               </div>
