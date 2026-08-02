@@ -217,12 +217,54 @@ export function AddJourney() {
             <label className="mb-1.5 block text-sm font-medium text-slate-700">
               {t.addJourney.time}
             </label>
-            <input
-              type="time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-              className={inputClass()}
-            />
+            <div className="grid grid-cols-3 gap-2">
+                <select
+                  value={time ? String(((parseInt(time.split(':')[0], 10) % 12) || 12)) : ''}
+                  onChange={(e) => {
+                    const hour12 = parseInt(e.target.value, 10);
+                    const currentMinute = time ? time.split(':')[1] : '00';
+                    const isPM = time ? parseInt(time.split(':')[0], 10) >= 12 : false;
+                    const hour24 = isPM ? (hour12 % 12) + 12 : hour12 % 12;
+                    setTime(`${String(hour24).padStart(2, '0')}:${currentMinute}`);
+                  }}
+                  className={inputClass()}
+                >
+                  <option value="">Hour</option>
+                  {Array.from({ length: 12 }, (_, i) => i + 1).map((h) => (
+                    <option key={h} value={h}>{h}</option>
+                  ))}
+                </select>
+
+                <select
+                  value={time ? time.split(':')[1] : ''}
+                  onChange={(e) => {
+                    const currentHour = time ? time.split(':')[0] : '00';
+                    setTime(`${currentHour}:${e.target.value}`);
+                  }}
+                  className={inputClass()}
+                >
+                  <option value="">Minute</option>
+                  {['00', '15', '30', '45'].map((m) => (
+                    <option key={m} value={m}>{m}</option>
+                  ))}
+                </select>
+
+                <select
+                  value={time ? (parseInt(time.split(':')[0], 10) >= 12 ? 'PM' : 'AM') : ''}
+                  onChange={(e) => {
+                    const currentHour24 = time ? parseInt(time.split(':')[0], 10) : 0;
+                    const hour12 = currentHour24 % 12 || 12;
+                    const currentMinute = time ? time.split(':')[1] : '00';
+                    const newHour24 = e.target.value === 'PM' ? (hour12 % 12) + 12 : hour12 % 12;
+                    setTime(`${String(newHour24).padStart(2, '0')}:${currentMinute}`);
+                  }}
+                  className={inputClass()}
+                >
+                  <option value="">AM/PM</option>
+                  <option value="AM">AM</option>
+                  <option value="PM">PM</option>
+                </select>
+              </div>
           </div>
           <div>
             <label className="mb-1.5 block text-sm font-medium text-slate-700">
