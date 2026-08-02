@@ -151,8 +151,8 @@ export interface PublicRouteInsight {
   crowdScore: number;
   crowdLevel: CrowdLevel;
   avgWaitingMins: number;
-  peakTime: string; // busiest reported time, HH:MM
-  bestTime: string; // least crowded reported time, HH:MM
+  peakTime: string|| null // busiest reported time, HH:MM
+  bestTime: string|| null // least crowded reported time, HH:MM
 }
 
 const CROWD_RANK: Record<CrowdLevel, number> = {
@@ -200,17 +200,19 @@ export async function getAllRouteInsights(): Promise<PublicRouteInsight[]> {
       return Number(a.standing) - Number(b.standing);
     })[0];
 
-    return {
-      routeNo: list[0].routeNo,
-      from: list[0].from,
-      to: list[0].to,
-      journeyCount: list.length,
-      crowdScore: score,
-      crowdLevel: scoreToLevel(score),
-      avgWaitingMins,
-      peakTime: busiest.time,
-      bestTime: calmest.time,
-    };
+   const hasEnoughData = list.length >= 3 && busiest.time !== calmest.time;
+
+return {
+  routeNo: list[0].routeNo,
+  from: list[0].from,
+  to: list[0].to,
+  journeyCount: list.length,
+  crowdScore: score,
+  crowdLevel: scoreToLevel(score),
+  avgWaitingMins,
+  peakTime: hasEnoughData ? busiest.time : null,
+  bestTime: hasEnoughData ? calmest.time : null,
+};
   });
 
   return insights.sort((a, b) => b.crowdScore - a.crowdScore);
