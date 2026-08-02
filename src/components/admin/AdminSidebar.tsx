@@ -2,7 +2,6 @@ import {
   Bus,
   LayoutDashboard,
   AlertTriangle,
-  BarChart3,
   Sparkles,
   FileText,
   Settings,
@@ -21,7 +20,6 @@ export function AdminSidebar({ onNavigate }: { onNavigate?: () => void }) {
   const items: { key: AdminPage; label: string; icon: typeof Bus }[] = [
     { key: 'dashboard', label: t.admin.sidebar.dashboard, icon: LayoutDashboard },
     { key: 'priorityRoutes', label: t.admin.sidebar.priorityRoutes, icon: AlertTriangle },
-    { key: 'crowdAnalytics', label: t.admin.sidebar.crowdAnalytics, icon: BarChart3 },
     { key: 'aiRecommendations', label: t.admin.sidebar.aiRecommendations, icon: Sparkles },
     { key: 'reports', label: t.admin.sidebar.reports, icon: FileText },
     { key: 'settings', label: t.admin.sidebar.settings, icon: Settings },
