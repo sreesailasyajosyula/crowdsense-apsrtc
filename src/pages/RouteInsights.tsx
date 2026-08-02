@@ -13,8 +13,8 @@ interface RouteInsight {
   crowdScore: number;
   crowdLevel: CrowdLevel;
   avgWaitingMins: number;
-  peakTime: string;
-  bestTime: string;
+  peakTime: string| null;
+  bestTime: string| null;
 }
 
 export function RouteInsights() {
@@ -61,8 +61,8 @@ export function RouteInsights() {
     return 'text-green-600';
   };
 
-  const formatTime = (hhmm: string) => {
-    if (!hhmm) return '—';
+  const formatTime = (hhmm: string | null) => {
+    if (!hhmm) return t.routeInsights.notEnoughData ?? 'Not enough data';
     const [h, m] = hhmm.split(':').map(Number);
     const period = h >= 12 ? 'PM' : 'AM';
     const hour12 = h % 12 === 0 ? 12 : h % 12;
