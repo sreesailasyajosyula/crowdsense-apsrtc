@@ -71,8 +71,6 @@ function AdminContent() {
         return <AdminDashboardPage />;
       case 'priorityRoutes':
         return <AdminPriorityRoutes />;
-      case 'crowdAnalytics':
-        return <AdminCrowdAnalytics />;
       case 'aiRecommendations':
         return <AdminAIRecommendations />;
       case 'reports':
