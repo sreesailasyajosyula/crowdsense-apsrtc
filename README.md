@@ -3,6 +3,9 @@
 A full-stack platform for collecting real-time bus crowd data from
 passengers and generating AI-assisted recommendations for transport
 authorities.
+## 🔗 Live Demo
+- **Passenger Site:** [crowdsense-apsrtc.vercel.app](https://crowdsense-apsrtc.vercel.app)
+- **Admin Panel:** [crowdsense-apsrtc.vercel.app/admin](https://crowdsense-apsrtc.vercel.app/admin)
 
 ## Tech stack
 
